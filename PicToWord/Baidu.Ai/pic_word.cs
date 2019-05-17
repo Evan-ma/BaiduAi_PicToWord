@@ -18,6 +18,7 @@ namespace Baidu.Ai.Properties
         {
 
             string word = "";
+            Console.WriteLine("加载图片");
             var image = File.ReadAllBytes(path);
             // 调用通用文字识别, 图片参数为本地图片，可能会抛出网络等异常，请使用try/catch捕获
             var client = new Baidu.Aip.Ocr.Ocr(API_KEY, SECRET_KEY);
@@ -29,13 +30,22 @@ namespace Baidu.Ai.Properties
                  {"detect_language", "true"},
                  {"probability", "true"}
             };
-
-            object result1 = client.GeneralBasic(image, options);
-            JavaScriptSerializer js = new JavaScriptSerializer();
-            getword getwd = js.Deserialize<getword>(result1.ToString());
-            for (int i=0; i<getwd.words_result_num;i++)
+            Console.WriteLine("识别图片");
+            try
             {
-                word += getwd.words_result[i].words+"\r\n";
+                object result1 = client.GeneralBasic(image, options);
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                getword getwd = js.Deserialize<getword>(result1.ToString());
+                for (int i = 0; i < getwd.words_result_num; i++)
+                {
+                    word += getwd.words_result[i].words + "\r\n";
+                }
+                Console.WriteLine("文字处理完成");
+            }
+            catch
+            {
+                return "对不起，图片质量差无法识别";
             }
             return word;
         }
@@ -45,18 +55,28 @@ namespace Baidu.Ai.Properties
 
             string word = "";
             var image = File.ReadAllBytes(path);
+            Console.WriteLine("加载图片1");
             // 调用通用文字识别, 图片参数为本地图片，可能会抛出网络等异常，请使用try/catch捕获
             var client = new Baidu.Aip.Ocr.Ocr(API_KEY, SECRET_KEY);
-            client.Timeout = 60000;  // 修改超时时间     
-            object result = client.GeneralBasic(image);
-            // 带参数调用通用文字识别, 图片参数为本地图片
-            JavaScriptSerializer js = new JavaScriptSerializer();
-            getword2 getwd = js.Deserialize<getword2>(result.ToString());
-            for (int i = 0; i < getwd.words_result_num; i++)
+            client.Timeout = 60000;  // 修改超时时间    
+            Console.WriteLine("识别图片2");
+            try
             {
-                word += getwd.words_result[i].words + "\r\n";
+                object result = client.GeneralBasic(image);
+                // 带参数调用通用文字识别, 图片参数为本地图片
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                getword2 getwd = js.Deserialize<getword2>(result.ToString());
+                for (int i = 0; i < getwd.words_result_num; i++)
+                {
+                    word += getwd.words_result[i].words + "\r\n";
+                }
+                Console.WriteLine("识别文字完成");
+
             }
-            Console.WriteLine(result);
+            catch
+            {
+                return "对不起，图片质量差无法识别";
+            }
             return word ;
         }
        

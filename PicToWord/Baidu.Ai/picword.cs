@@ -56,6 +56,7 @@ namespace Baidu.Ai
         private string ss2;
         private void sss1(object str)
         {
+            Console.WriteLine("线程1启动");
             ss1 = Bdai.onlygetword(path); 
             if (textBox1.InvokeRequired && progressBar1.InvokeRequired)
             {
@@ -75,6 +76,7 @@ namespace Baidu.Ai
         }
         private void sss2(object str)
         {
+            Console.WriteLine("线程2启动");
             ss2 = Bdai.getwordandfix(path);
             if (textBox2.InvokeRequired && progressBar1.InvokeRequired)
             {
