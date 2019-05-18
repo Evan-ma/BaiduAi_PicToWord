@@ -15,6 +15,7 @@ namespace Baidu.Ai
 
         private static string path;
 
+        private Bdai bba = new Bdai();
         [Obsolete]
         private void button1_Click(object sender, EventArgs e)
         {
@@ -57,7 +58,7 @@ namespace Baidu.Ai
         private void sss1(object str)
         {
             Console.WriteLine("线程1启动");
-            ss1 = Bdai.onlygetword(path); 
+            ss1 = bba.onlygetword(path); 
             if (textBox1.InvokeRequired && progressBar1.InvokeRequired)
             {
                 Action<string> actionDelegate = (x) =>
@@ -77,7 +78,7 @@ namespace Baidu.Ai
         private void sss2(object str)
         {
             Console.WriteLine("线程2启动");
-            ss2 = Bdai.getwordandfix(path);
+            ss2 = bba.getwordandfix(path);
             if (textBox2.InvokeRequired && progressBar1.InvokeRequired)
             {
                 Action<string> actionDelegate = (x) =>

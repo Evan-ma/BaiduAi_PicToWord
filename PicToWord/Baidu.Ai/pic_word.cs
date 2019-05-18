@@ -6,7 +6,7 @@ using System.Web.Script.Serialization;
 
 namespace Baidu.Ai.Properties
 {
-    static class  Bdai
+    public class  Bdai
     {
         [Obsolete]
         private static string APP_ID = ConfigurationSettings.AppSettings["APP_ID"];
@@ -14,9 +14,8 @@ namespace Baidu.Ai.Properties
         private static string API_KEY = ConfigurationSettings.AppSettings["API_KEY"];
         [Obsolete]
         private static string SECRET_KEY = ConfigurationSettings.AppSettings["SECRET_KEY"];
-        public static string getwordandfix(string path)
+        public string getwordandfix(string path)
         {
-
             string word = "";
             Console.WriteLine("加载图片");
             var image = File.ReadAllBytes(path);
@@ -50,7 +49,7 @@ namespace Baidu.Ai.Properties
             return word;
         }
 
-        public static string onlygetword(string path)
+        public string onlygetword(string path)
         {
 
             string word = "";
@@ -99,9 +98,6 @@ namespace Baidu.Ai.Properties
             public float average { get; set; }
             public float min { get; set; }
         }
-
-
-
         public class getword2
         {
             public long log_id { get; set; }
